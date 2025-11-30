@@ -75,7 +75,48 @@ class _MySimpleNotesState extends State<MySimpleNotes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
+      appBar: AppBar(
+        title: Text('Simple Notes with SQLite'),
+      ),
+      body: FutureBuilder<List<Note>>(
+        future: DatabaseHelper.instance.readAllNotes(),
+        builder: (context, snapshot){
+          //kondisi untuk menampilkan tulisan ketika aplikasi masih loading atau ketika user sudah masuk aplikasi, tapi belum ada catatan yang dibuatnya sama sekali
+          if (!snapshot.hasData || snapshot.data!.isEmpty) return Center(child: Text(('You don\'t have any note yet'), 
+          style: TextStyle(
+            fontSize: 20,
+          )));
+
+          return ListView.builder(
+            itemCount: snapshot.data!.length,
+            itemBuilder: (context, index) {
+              Note note = snapshot.data![index];
+              return Card(
+                child: ListTile(
+                  title: Text(note.title),
+                  subtitle: Text(note.content),
+                  //bikin ikon di daerah kanan (belakang) card list tile-nya
+                  trailing: IconButton(
+                    icon: Icon(Icons.delete, color: Colors.red),
+                    onPressed: () async {
+                      await DatabaseHelper.instance.delete(note.id!);
+                      setState( () {} );
+                    },
+                  ),
+                )
+              );
+            }
+          );
+        }
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () async {
+          _showForm(); //panggil fungsi pembuka form
+          setState(() {});
+        },
+      ),
     );
   }
 }
