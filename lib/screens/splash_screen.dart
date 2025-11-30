@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   _navigateToHome() async { //bikin fungsi private jenis asynchronus (fungsi yang bisa menunggu proses) bernama _navigateToHome()
     await Future.delayed(const Duration(seconds: 2)); //ini untuk mengatur waktu delay atau lama dari splash screen akan muncul di layar
   if (mounted){ 
-    /*selama delay, widget State<SplashScreen> ada beberapa kemungkinan yang membuat widget tersebut ditutup atau diganti oleh sistem flutter.
+    /*selama delay, widget State<SplashScreen> mengalami beberapa kemungkinan yang membuat widget tersebut ditutup atau diganti oleh sistem flutter.
       mounted berfungsi untuk memberi tahu flutter bahwa widget State<SplashScreen> ini masih aktif meski setelah delay agar kode navigasi
       di bawah ini bisa  terpanggil, sehingga setelah splash screen muncul di layar, berikutnya akan diarahkan ke halaman home dari aplikasi.
       penggunaan mounted ini harus selalu dilakukan jika ada navigasi di fungsi jenis asynchronus.*/
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 24),
             const Text(
-              'Please wait while we are preparing the app',
+              'Let\'s snap together',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
