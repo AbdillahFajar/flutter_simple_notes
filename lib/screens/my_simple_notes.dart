@@ -82,7 +82,7 @@ class _MySimpleNotesState extends State<MySimpleNotes> {
         future: DatabaseHelper.instance.readAllNotes(),
         builder: (context, snapshot){
           //kondisi untuk menampilkan tulisan ketika aplikasi masih loading atau ketika user sudah masuk aplikasi, tapi belum ada catatan yang dibuatnya sama sekali
-          if (!snapshot.hasData || snapshot.data!.isEmpty) return Center(child: Text(('You don\'t have any note yet'), 
+          if (!snapshot.hasData || snapshot.data!.isEmpty) return Center(child: Text(('You don\'t have any notes yet'), 
           style: TextStyle(
             fontSize: 20,
           )));
